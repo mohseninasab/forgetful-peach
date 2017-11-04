@@ -1591,10 +1591,14 @@ if (Vel) {
       }
     });
   };
-
+ 
   $(document).ready(function () {
     $('.collapsible').collapsible();
+    //set all the handlers 
   });
+
+
+
 })(jQuery);;(function ($) {
 
   // Add posibility to scroll to selected option
