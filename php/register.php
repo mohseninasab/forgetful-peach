@@ -34,7 +34,7 @@
  //the line below will call class "validation" to check if all the data are valid or not
  $validationaAnswer = $validation->checkValidation($dataList);
 
-if( $password->value === $rePassword->value && $validationaAnswer === 'valid'){
+if( $password->value === $rePassword->value && $validationaAnswer === true){
 
     $query = 'SELECT * FROM taskData.users;';
     $result = $db->runQuery($query);
@@ -48,12 +48,12 @@ if( $password->value === $rePassword->value && $validationaAnswer === 'valid'){
                die;
           }
        }
-       $query = "INSERT INTO `taskData`.`users` (`name`, `lastName` ,`userName`, `email`, `password`) VALUES ( '$firstName->value', '$lastName->value', ' $userName->value', '$email->value', ' $password->value')";
+       $query = "INSERT INTO `taskData`.`users` (`name`, `lastName` ,`userName`, `email`, `password`) VALUES ('$firstName->value', '$lastName->value', ' $userName->value', '$email->value', '$password->value')";
        $result = $db->runQuery($query);
        echo json_encode("(inside loop) you regist seccusfuly !!!");
    }
    else{
-       $query = "INSERT INTO `taskData`.`users` (`name`, `lastName` ,`userName`, `email`, `password`) VALUES ( '$firstName->value', '$lastName->value', ' $userName->value', '$email->value', ' $password->value')";
+       $query = "INSERT INTO `taskData`.`users` (`name`, `lastName` ,`userName`, `email`, `password`) VALUES ('$firstName->value', '$lastName->value', ' $userName->value', '$email->value', '$password->value')";
        $result = $db->runQuery($query);
        echo json_encode("(else)you regist seccusfuly !!!");
    }

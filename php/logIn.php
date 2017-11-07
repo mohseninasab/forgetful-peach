@@ -18,9 +18,7 @@ session_start();
  $dataList = array($email, $password);
  $validationaAnswer = $validation->checkValidation($dataList);
 
-
-
-if($validationaAnswer === 'valid'){ 
+if($validationaAnswer === true){ 
 
     $query = "SELECT * FROM taskData.users;";
     $result = $db->runQuery($query);

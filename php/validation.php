@@ -6,6 +6,8 @@ class data{
 }
 
 class validator{
+    private $j=0;
+
 
     public function checkValidation($input){
         $count  = count($input);
@@ -22,20 +24,23 @@ class validator{
                 $answer = $this->checkPassword($input[$i]->value);
             }else if($input[$i]->type === 'number'){
                 $answer = $this->checkNumber($input[$i]->value);    
-            }else if($input[$i]->type === 'postalCode'){
-                $answer = $this->checkPostalCode($input[$i]->value);    
+            }else if($input[$i]->type === 'socialNumber'){
+                $answer = $this->checkSocialNumber($input[$i]->value);    
+            } else if($input[$i]->type === 'phoneNumber'){
+                $answer = $this->checkPhoneNumber($input[$i]->value);    
             }
 
 
             if($answer === 'invalid'){
-                 array_push($invalidList,$input[$i]->value);
+
+                 array_push($invalidList,$input[$i]);
             }
 
         }
         if( count($invalidList) > 0 ){
             return $invalidList;
         }else{
-            return 'valid';
+            return true;
         }
    }
 
@@ -48,7 +53,7 @@ class validator{
        }
     }
     private function checkUsrName($usrName){
-        $regex =  '/[0-9a-z]/i';
+        $regex =  '/^[a-zA-z]+[0-9a-zA-z_]+[0-9a-zA-Z]$/';
         if(preg_match( $regex, $usrName)){
             return 'valid';
            }else{
@@ -64,7 +69,7 @@ class validator{
            }
     }
     private function checkPassword($password){
-        $regex =  '/^[0-9a-z][0-9a-z._-][0-9a-z]+$/i';
+        $regex =  '/^[0-9a-zA-Z]+[0-9a-zA-Z@._-]+[0-9a-zA-Z]$/';
         if(preg_match($regex, $password)){
             return 'valid';
            }else{
@@ -79,9 +84,18 @@ class validator{
             return 'invalid';
            }
     }
-    private function checkPostalCode($pCode){
-        $regex =  '/^\d{5}(-\d{5})$/';
-        if(preg_match( $regex, $pCode)){
+    private function checkSocialNumber($sNumber){
+        $regex =  '/^\d{10}$/';
+        if(preg_match( $regex, $sNumber)){
+            return 'valid';
+           }else{
+            return 'invalid';
+           }
+
+    }
+    private function checkPhoneNumber($pNumber){
+        $regex =  '/^[+]+\d{12}$|^[0]+\d{10}$/';
+        if(preg_match( $regex, $pNumber)){
             return 'valid';
            }else{
             return 'invalid';

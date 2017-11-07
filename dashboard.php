@@ -4,7 +4,7 @@ session_start();
 //require "php/managingTask.php";
 
 if(!isset($_SESSION["userId"])){
-    echo "<h1>you cant access to this page you need to log in first !!</h1>";
+    echo "<h1>you can not access to this page you need to log in first !!</h1>";
 }
 
 else{

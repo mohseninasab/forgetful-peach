@@ -53,7 +53,7 @@ function validateName(name) {
 // checking validation of user names
 //#################################################################################
 function validateUrsName(usrname) {
-    var alphaExp = /^[0-9a-z]+$/i;
+    var alphaExp = /^[a-zA-z]+[0-9a-zA-z_]+[0-9a-zA-Z]$/;
     if (alphaExp.test(usrname)) {
         return "valid";
     } else {
@@ -64,7 +64,7 @@ function validateUrsName(usrname) {
 // checking validation of emails 
 //#################################################################################
 function validateEmail(email) {
-    var alphaExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var alphaExp = /^[a-z][a-z0-9._-]+@(\w+\.)+[a-z]{2,6}$/;
     if (alphaExp.test(email)) {
         return "valid";
     } else {
@@ -75,7 +75,7 @@ function validateEmail(email) {
 // checking validation of passwords 
 //#################################################################################
 function validatePassword(password) {
-    var alphaExp = /^[a-z0-9][0-9a-z._-][0-9a-z]+$/i;
+    var alphaExp = /^[0-9a-zA-Z]+[0-9a-zA-Z@._-]+[0-9a-zA-Z]$/;
     if (alphaExp.test(password)) {
         return "valid";
     } else {
