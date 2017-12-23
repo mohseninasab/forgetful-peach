@@ -18,36 +18,30 @@ window.onload = function () {
 function collectData() {
 
     $.ajax({
+        url: "../php/managingTask.php",
         type: "POST",
         dataType: "json",
+        cache: false,
         data: {
-            request: "showAllData",
-            data: "none",
-            id: -1
-        },
-        url: "php/managingTask.php",
-        success: function (answer) {
-            console.log(answer);
-            displayData(answer);
-
+            requestType: "showAllData"
+        }, success: function (answer) {
+            if (answer.length > 0) {
+                console.log("Data has Been received !!");
+                displayData(answer);
+            } else {
+                console.log("There is no data for you !!");
+            }
+        }, error: function (msg) {
+            console.log(msg);
         }
+
     });
+
+
 }
 
 //######################################################################################
-// a materilize plug-in   "calendar"
-//######################################################################################
-
-$('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15, // Creates a dropdown of 15 years to control year,
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Ok',
-    closeOnSelect: false // Close upon selecting a date,
-});
-//######################################################################################
-// sends requset to server to check target task as done
+// sends request to server to check target task as done
 //######################################################################################
 
 function checkAsDone(input, status) {
@@ -64,116 +58,98 @@ function checkAsDone(input, status) {
 
 
     $.ajax({
+        url: "../php/managingTask.php",
         type: "POST",
         dataType: "json",
         data: {
-            request: reqValue,
+            requestType: reqValue,
             data: "none",
             id: input
         },
-        url: "php/managingTask.php",
         success: function (answer) {
             console.log(answer);
             setTimeout(collectData, 300);
+        }, error: function (answer) {
+            console.log(answer);
         }
     });
 }
 
 //######################################################################################
-// upload new task 
+// upload new task
 //######################################################################################
 
 function assignTask() {
 
     var noteData = {
+        requestFrom: "user",
         subject: document.getElementById("subject").value,
-        date: document.getElementById("date").value,
+        date: document.getElementById("deadLine").value,
         note: document.getElementById("note").value,
         taskType: publicTask
-    }
-    if (noteData.subject != "" && noteData.date != "" && noteData.note != "") {
+    };
+
+    if (noteData.subject !== "" && noteData.date !== "" && noteData.note !== "") {
+
         $.ajax({
+            url: "../php/managingTask.php",
             type: "POST",
             dataType: "json",
             data: {
-                request: "addTask",
+                requestType: "addTask",
                 data: noteData,
-                id: -1
+                targetUser: "none"
             },
-            url: "php/managingTask.php",
             success: function (answer) {
                 console.log(answer);
                 setTimeout(collectData, 300);
                 clearForm();
+            }, error: function (answer) {
+                console.log(answer);
             }
         });
+    } else {
+        alert("please fill up all of Inputs !!")
     }
 }
+
 //######################################################################################
 // change "publicTask" variable
 //######################################################################################
 
-function setTaskType() {
-
-    if (publicTask === 0) {
-        publicTask = 1;
-    } else {
-        publicTask = 0;
-    }
+function setTaskType(input) {
+    publicTask = input;
 }
 
 //######################################################################################
-//clear html form to incert new update
+//clear html form to insert new update
 //######################################################################################
 
 function clearForm() {
     document.getElementById("subject").value = "";
-    document.getElementById("date").value = "";
+    document.getElementById("deadLine").value = "";
     document.getElementById("note").value = "";
 }
+
 //######################################################################################
 // send request to server to logout the user
 //######################################################################################
 function logout() {
     $.ajax({
+        url: "../php/logout.php",
         type: "POST",
         dataType: "json",
         data: {
-            request: "logout",
+            requestType: "logout",
             data: "none",
             id: -1
         },
-        url: "php/managingTask.php",
-        success: function (answer) {
-            window.location.href = "index.html";
 
+        success: function (answer) {
+            if (answer) {
+                window.location.href = "../index.html";
+            }
         }
     });
-
-}
-//######################################################################################
-// Animation
-//######################################################################################
-function display() {
-    if (noteInputState === 0) {
-        moveDown("noteFrame");
-        noteInputState = 1;
-    } else if (noteInputState === 1) {
-        moveUp("noteFrame");
-        setTimeout(hide,500,"noteFrame");
-        noteInputState = 0;
-    }
 }
 
-function moveUp(input) {
-    document.getElementById(input).setAttribute("class", "row frame show moveTop")
-}
-
-function moveDown(input) {
-    document.getElementById(input).setAttribute("class", "row frame show moveMiddle")
-}
-
-function hide(input) {
-    document.getElementById(input).setAttribute("class", "row frame hide")
-
-}

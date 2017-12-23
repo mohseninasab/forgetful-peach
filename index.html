@@ -4,63 +4,44 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="MaterialDesign/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap-4/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <link href="MaterialDesign/css/materialDesignIcons.css" rel="stylesheet" type="text/css">
     <title>To Do List</title>
 </head>
 
-<body>
-    <div class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper #006064 cyan darken-4">
-                <a href="register.html"> ثبت نام</a>
-                <a href="#!" class="right brand-logo">لیست کارها</a>
+<!--####################################################################################################################-->
+<body class="bg-color-1">
+<!--####################################################################################################################-->
+<div class="row">
+    <div class="col-sm-3 container align-content-center add-space-1 ">
+        <div class="form-signin bg-white pl-3 pr-3 pt-4 pb-4 rounded box-shadow-1">
+            <h2 class="form-signin-heading text-wight-3">Please Sign In</h2>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus=""
+                   type="email">
+            <br>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input id="inputPassword" class="form-control" placeholder="Password" required="" type="password">
+            <div class="checkbox">
+                <label class="mt-2">
+                    <input value="remember-me" type="checkbox"> Remember me
+                </label>
             </div>
-        </nav>
-    </div>
-
-    <div class="row">
-        <div class="col s4"></div>
-
-        <div class="card col s4">
-
-            <div class="input-field col s12">
-                <div>
-                    <h5 class="right  #263238 blue-grey-text darken-4">ورود</h5>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="mdi mdi-email prefix"></i>
-                            <input id="email" type="email" class="validate">
-                            <label for="email">ایمیل</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="mdi mdi-textbox-password prefix"></i>
-                            <input id="password" type="password" class="validate">
-                            <label for="password">رمز عبور</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s4"></div>
-                        <div class="input-field col s4">
-                            <button class="btn waves-effect waves-light " onclick="collectData()">ورود 
-                        <i class="mdi mdi-send right"></i>
-                    </button>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col s4"></div>
+            <br>
+            <button class="btn  btn-primary  " onclick="login()" type="submit">Sign in</button>
+            <a class=" btn btn-warning" href="html/register.html">Register</a>
         </div>
-    </div>
-    <script type="text/javascript" src="jquery_library/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-    <script type="text/javascript" src="JS/logIn.js"></script>
-    <script type="text/javascript" src="JS/validation.js"></script>
+    </div> <!-- /container -->
+</div>
+
+<!--####################################################################################################################-->
+
+<script type="text/javascript" src="jquery_library/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="popper/popper.min.js"></script>
+<script type="text/javascript" src="bootstrap-4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="JS/logIn.js"></script>
+<script type="text/javascript" src="JS/validation.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,16 @@
+//######################################################################################
+//receive all the data for login and send them to server
+//######################################################################################
 
-function collectData() {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+function login() {
+
+
+    /**
+     * @param answer.email            email received from server.
+     * @param answer.accessLevel      user access level.
+     */
+    var email = document.getElementById("inputEmail").value;
+    var password = document.getElementById("inputPassword").value;
 
     var dataList = [{
         'type': 'email',
@@ -10,11 +19,10 @@ function collectData() {
         'type': 'password',
         'value': password
     }];
-
     var answer = validate(dataList);
-    //alert(" email:" + email + "\n password:" + password + "\n validation:" + answer);
+    console.log("validation answer -> " + answer);
 
-    if (answer === "valid") {
+    if (answer === true) {
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -24,12 +32,57 @@ function collectData() {
             },
             url: "php/logIn.php",
             success: function (answer) {
-                if (answer === "valid") {
-                    window.location.href = "dashboard.php";
+                console.log(answer);
+                if (answer.email === email && answer.accessLevel === "1") {
+                    window.location.href = "html/adminPanel.php";
+                } else if (answer.email === email && answer.accessLevel === "0") {
+                    window.location.href = "html/dashboard.php";
                 } else {
                     alert("server Answer : " + answer);
                 }
             }
         });
+    } else {
+        displayRegisterError(answer)
     }
 }
+
+//######################################################################################
+//this function will display all the validation Error
+//######################################################################################
+
+function displayRegisterError(answer) {
+    var i, count = answer.length;
+
+    var email = document.getElementById("inputEmail");
+    var password = document.getElementById("inputPassword");
+
+    if (count > 0) {
+        for (i = 0; i < count; i++) {
+
+            if (answer[i] === "email") {
+                email.setAttribute("class", "form-control warning");
+            }
+            if (answer[i] === "password") {
+                password.setAttribute("class", "form-control warning");
+            }
+        }
+    }
+}
+
+//######################################################################################
+//bootstrap plugins
+//######################################################################################
+
+
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+});
+
+
+// this code will reset color of text boxes to white
+$('.form-control').focus(function () {
+    this.setAttribute("class", "form-control");
+    console.log("hello");
+
+});

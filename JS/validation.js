@@ -1,17 +1,17 @@
 //#################################################################################
-// this function recive date  with their type the check their validation  
+// this function receive date  with their type the check their validation
 //#################################################################################
 function validate(input) {
 
-    console.log("validate() recived this -> ", input);
-    var arrlength = input.length;
+    console.log("validate() receive this -> ", input);
+    var arrayLength = input.length;
     var i;
     var invalidList = [];
     var checked;
 
 
-    for (i = 0; i < arrlength; i++) {
-        if (input[i].type === "name") {
+    for (i = 0; i < arrayLength; i++) {
+        if (input[i].type === "firstName" || input[i].type === "lastName") {
             checked = validateName(input[i].value);
         } else if (input[i].type === 'usrName') {
             checked = validateUrsName(input[i].value);
@@ -26,81 +26,63 @@ function validate(input) {
         }
 
 
-        if (checked === "invalid") {
+        if (!checked) {
             invalidList.push(input[i].type);
         }
 
     }
     if (invalidList.length === 0) {
-        return "valid";
+        return true;
     } else {
+        displayRegisterError(invalidList);
         return invalidList;
     }
 }
+
 //#################################################################################
 // checking validation of names
 //#################################################################################
 function validateName(name) {
-    var alphaExp = /^[a-z]+$/i;
-    if (alphaExp.test(name)) {
-        return "valid";
-    } else {
-        return "invalid";
-    }
-
+    var alphaExp = /^[a-z ]+$/i;
+    return alphaExp.test(name); // this function will return true or false
 }
+
 //#################################################################################
 // checking validation of user names
 //#################################################################################
-function validateUrsName(usrname) {
+function validateUrsName(username) {
     var alphaExp = /^[a-zA-z]+[0-9a-zA-z_]+[0-9a-zA-Z]$/;
-    if (alphaExp.test(usrname)) {
-        return "valid";
-    } else {
-        return "invalid";
-    }
+    return alphaExp.test(username); // this function will return true or false
 }
+
 //#################################################################################
 // checking validation of emails 
 //#################################################################################
 function validateEmail(email) {
     var alphaExp = /^[a-z][a-z0-9._-]+@(\w+\.)+[a-z]{2,6}$/;
-    if (alphaExp.test(email)) {
-        return "valid";
-    } else {
-        return "invalid";
-    }
+    return alphaExp.test(email); // this function will return true or false
 }
+
 //#################################################################################
 // checking validation of passwords 
 //#################################################################################
 function validatePassword(password) {
     var alphaExp = /^[0-9a-zA-Z]+[0-9a-zA-Z@._-]+[0-9a-zA-Z]$/;
-    if (alphaExp.test(password)) {
-        return "valid";
-    } else {
-        return "invalid";
-    }
+    return alphaExp.test(password); // this function will return true or false
 }
+
 //#################################################################################
 // checking validation of numbers
 //#################################################################################
 function validateNumber(number) {
     var alphaExp = /^[0-9]+$/;
-    if (alphaExp.test(number)) {
-        return "valid";
-    } else {
-        return "invalid";
-    }
+    return alphaExp.test(number); // this function will return true or false
 }
+
 //#################################################################################
 // checking validation of postal code 
 //#################################################################################
 function validatePostalCode(pCode) {
     var alphaExp = /^\d{5}(-\d{5})$/;
-    if (alphaExp.test(pCode)) {
-        return "valid";
-    } else {
-        return "invalid";
-    }
+    return alphaExp.test(pCode); // this function will return true or false
 }

@@ -1,91 +1,165 @@
 @import url(../Iran_Sanse/css/fontiran.css);
-body {
-    font-family: IRANSans;
-    font-weight: 300;
-    background-color: #fdfdfd;
+
+/*#############################################*/
+/* background theme                            */
+/*#############################################*/
+
+html {
+    height: 100%;
+}
+body{
+    font-family: IRANSans,Helvetica;
 }
 
-.card {
-    border-radius: 6px;
+.bg-color-1 {
+    height: 100%;
+    background: linear-gradient(to top, #0ba360 0%, #3cba92 100%) no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+.bg-color-2{
+    height: 100%;
+    background: linear-gradient(to left, #BDBBBE 0%, #9D9EA3 100%), radial-gradient(88% 271%, rgba(255, 255, 255, 0.25) 0%, rgba(254, 254, 254, 0.25) 1%, rgba(0, 0, 0, 0.25) 100%), radial-gradient(50% 100%, rgba(255, 255, 255, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%) no-repeat fixed;
+    background-blend-mode: normal, lighten, soft-light;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-.margin-left-auto {
-    margin-left: auto;
-}
-
-.margin-right-auto {
-    margin-right: auto;
+/*#############################################*/
+/* highlight the element by hover              */
+/*#############################################*/
+table.highlight tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
 .clear-margin {
-    margin: 0;
+    margin-bottom: 0;
 }
 
-.rouded-corner {
-    border-radius: 6px;
-}
-.topOfAll{
-    z-index: 2000;
-    
-}
-
-#inputTask {
-    display: block;
-}
-/*###############################################*/
-
-/*  Animation  */
-.frame{
-    z-index: 1000;
-    position: fixed;
+label {
+    padding-top: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
-.moveTop {
-    z-index: 1000;
-    position: fixed;
-    animation: flowToTop 0.5s;
-}
-
-div.moveTop {
-    z-index: 1000;
-    display: block;
-}
-
-@keyframes flowToTop {
-    0% {
-        top: 0px;
-    }
-    100% {
-        top: -800px;
-    }
-}
-
-.moveMiddle {
-    z-index: 1000;
-    position: fixed;
-    animation: flowToMiddle 0.5s;
-
-}
-
-div.moveMiddle {
-    display: block;
-}
-
-@keyframes flowToMiddle {
-    0% {
-        top: -800px;
-    }
-    100% {
-        top: 0px;
-    }
-}
+/*#############################################*/
+/* vanish elements                             */
+/*#############################################*/
 
 .hide {
     display: none;
 }
 
-.show {
-    display: block;
+/* ############################################*/
+/*  Shadow                                     */
+/* ############################################*/
+
+.box-shadow-1 {
+    box-shadow: 5px 5px 20px #0000003d;
 }
 
-/*###############################################*/
+.box-shadow-2 {
+    box-shadow: 5px 5px 15px #0000003d;
+}
+
+.box-shadow-3 {
+    box-shadow: 5px 5px 10px #0000003d;
+}
+
+.box-shadow-4 {
+    box-shadow: 5px 5px 5px #0000003d;
+}
+
+/* ############################################*/
+/* Font Wight                                  */
+/* ############################################*/
+
+.text-wight-1 {
+    font-weight: 100;
+}
+
+.text-wight-2 {
+    font-weight: 200;
+}
+
+.text-wight-3 {
+    font-weight: 300;
+}
+
+.text-wight-4 {
+    font-weight: 400;
+}
+
+/*#############################################*/
+/* adding space on top of element              */
+/*#############################################*/
+.add-space-1 {
+    margin-top: 50px;
+}
+
+.add-space-2 {
+    margin-top: 100px;
+}
+
+.add-space-3 {
+    margin-top: 150px;
+}
+
+.add-space-4 {
+    margin-top: 200px;
+}
+
+.warning {
+    background-color: #ffb4c8;
+
+}
+
+/*#############################################*/
+/* background color                            */
+/*#############################################*/
+.light-green {
+    background-color: #76eba6;
+    color: white;
+}
+
+.light-blue {
+    background-color: #66d2f0;
+    color: white;
+}
+
+.light-red {
+    background-color: #eba4bc;
+    color: white;
+}
+
+.light-yellow {
+    background-color: #d5c667;
+    color: white;
+}
+.bg-lightGray{
+    background-color: #f4f4f4;
+}
+/*#############################################*/
+/* background color                            */
+/*#############################################*/
+.move-right {
+    position: absolute;
+    right: 0;
+    margin-right:2% ;
+}
+
+.move-left {
+    position: absolute;
+    left: 0;
+}
+.right-to-left {
+    direction: rtl;
+}
+
+

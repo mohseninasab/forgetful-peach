@@ -1,22 +1,21 @@
+//######################################################################################
+//this function will receive all the register data from user and validate data
+//######################################################################################
 
 function collectRegData() {
-    var firstName = document.getElementById("first_name").value;
-    var lastName = document.getElementById("last_name").value;
-    var userName = document.getElementById("user_name").value;
-    var email = document.getElementById("email").value;
+    var firstName = document.getElementById("registerFirstName").value;
+    var lastName = document.getElementById("registerLastName").value;
+    var email = document.getElementById("RegisterEmail").value;
     var password = document.getElementById("password").value;
-    var rePassword = document.getElementById("rePassword").value;
+    var rePassword = document.getElementById("confirmPassword").value;
 
-
+    // First we create a list of objects that contains data type and value
     var dataList = [{
-        'type': 'name',
+        'type': 'firstName',
         'value': firstName
     }, {
-        'type': 'name',
+        'type': 'lastName',
         'value': lastName
-    }, {
-        'type': 'usrName',
-        'value': userName
     }, {
         'type': 'email',
         'value': email
@@ -27,12 +26,12 @@ function collectRegData() {
         'type': 'password',
         'value': rePassword
     }];
-    console.log("password->",email);
 
+    // send data to the validation function to validate and receive answer
     var answer = validate(dataList);
     console.log("validation.js answer:", answer);
 
-    if (password === rePassword && answer === "valid") {
+    if (password === rePassword && answer === true) {
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -41,16 +40,56 @@ function collectRegData() {
                 passwordPacket: password,
                 rePasswordPacket: rePassword,
                 firstNamePacket: firstName,
-                lastNamePacket: lastName,
-                userNamePacket: userName
+                lastNamePacket: lastName
             },
-            url: "php/register.php",
+            url: "../php/register.php",
             success: function (answer) {
-                console.log("server answer :", answer);
-
+                if (answer) {
+                    window.location.href = "../html/dashboard.php";
+                } else {
+                    alert("there are some server internal error !!");
+                }
+            }, error: function (answer) {
+                console.log(answer);
             }
         });
-    } else {
-        console.log("rigister.js fail check your information !");
+    }else{
+        displayRegisterError(answer)
     }
 }
+
+//######################################################################################
+//this function will display all the validation Error
+//######################################################################################
+
+function displayRegisterError(answer) {
+    var i, count = answer.length;
+    var firstName = document.getElementById("registerFirstName");
+    var lastName = document.getElementById("registerLastName");
+    var email = document.getElementById("RegisterEmail");
+    var password = document.getElementById("password");
+    var rePassword = document.getElementById("confirmPassword");
+
+    if (count > 0) {
+        for (i = 0; i < count; i++) {
+            if (answer[i] === "firstName") {
+                firstName.setAttribute("class", "form-control warning");
+            }
+            if (answer[i] === "lastName") {
+                lastName.setAttribute("class", "form-control warning");
+            }
+            if (answer[i] === "email") {
+                email.setAttribute("class", "form-control warning");
+            }
+            if (answer[i] === "password") {
+                password.setAttribute("class", "form-control warning");
+                rePassword.setAttribute("class", "form-control warning");
+            }
+        }
+    }
+}
+$('.form-control').focus(function () {
+    this.setAttribute("class","form-control");
+    console.log("hello");
+
+});
